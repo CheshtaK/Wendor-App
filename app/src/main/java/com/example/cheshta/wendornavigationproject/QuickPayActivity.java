@@ -22,7 +22,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class QuickPayActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-//    FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
@@ -30,6 +30,8 @@ public class QuickPayActivity extends AppCompatActivity implements ZXingScannerV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
 
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
@@ -145,12 +147,12 @@ public class QuickPayActivity extends AppCompatActivity implements ZXingScannerV
         alert.show();
     }
 
-    /*@Override
+    @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 }

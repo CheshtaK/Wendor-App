@@ -41,12 +41,18 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".OfferActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MachineActivity" />
-        <activity android:name=".QuickPayActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".OfferActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MachineActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".QuickPayActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"></activity>
     </application>
 
 </manifest>
