@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "310808134291",
+    "firebase_url": "https://wendor-d9d7e.firebaseio.com",
+    "project_id": "wendor-d9d7e",
+    "storage_bucket": "wendor-d9d7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310808134291:android:5cb1e947760f9aa9",
+        "android_client_info": {
+          "package_name": "com.example.cheshta.wendornavigationproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310808134291-3p0upfvvs151no6eelnvdc3olr3lgbec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cheshta.wendornavigationproject",
+            "certificate_hash": "65b438addd2339404c766e7da9e6673cf9fdc927"
+          }
+        },
+        {
+          "client_id": "310808134291-qf1elvr9010rnhubos9c019v0lfbeb3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp62FcMSZgIJRxn9gS21O-0WPbJpLDItY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310808134291-qf1elvr9010rnhubos9c019v0lfbeb3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310808134291:android:808f490fd879a68c",
+        "android_client_info": {
+          "package_name": "com.example.cheshta.wendorproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310808134291-5gu25h48i88rfotle6u4jitnirr1ku99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cheshta.wendorproject",
+            "certificate_hash": "65b438addd2339404c766e7da9e6673cf9fdc927"
+          }
+        },
+        {
+          "client_id": "310808134291-qf1elvr9010rnhubos9c019v0lfbeb3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp62FcMSZgIJRxn9gS21O-0WPbJpLDItY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310808134291-qf1elvr9010rnhubos9c019v0lfbeb3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
