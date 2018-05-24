@@ -8,4 +8,5 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">2073911356200988</string>
     <string name="fb_login_protocol_scheme">fb2073911356200988</string>
+    <string name="google_maps_API_key">AIzaSyDF4mTcIVA9UNz1YCIegPq2M5x4_VZkLaE</string>
 </resources>

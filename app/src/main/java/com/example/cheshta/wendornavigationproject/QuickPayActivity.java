@@ -152,7 +152,15 @@ public class QuickPayActivity extends AppCompatActivity implements ZXingScannerV
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            displayAlertMessage("You need to be logged in to view your profile",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent loginIntent = new Intent(QuickPayActivity.this, LoginActivity.class);
+                            startActivity(loginIntent);
+                            finish();
+                        }
+                    });
         }
     }
 }

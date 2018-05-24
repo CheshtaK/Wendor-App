@@ -1,6 +1,8 @@
 package com.example.cheshta.wendornavigationproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -25,7 +27,24 @@ public class ProfileActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            displayAlertMessage("You need to be logged in to view your profile",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent loginIntent = new Intent(ProfileActivity.this, LoginActivity.class);
+                            startActivity(loginIntent);
+                            finish();
+                        }
+                    });
         }
+    }
+
+    public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
+        new AlertDialog.Builder(ProfileActivity.this)
+                .setMessage(message)
+                .setPositiveButton("LOGIN",listener)
+                .setNegativeButton("CANCEL",null)
+                .create()
+                .show();
     }
 }
