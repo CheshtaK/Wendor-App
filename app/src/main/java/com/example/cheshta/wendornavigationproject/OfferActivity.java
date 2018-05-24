@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,9 @@ public class OfferActivity extends AppCompatActivity {
     private RecyclerView rvOffersList;
     Toolbar offerToolbar;
 
-    private DatabaseReference mOfferDatabase;
+    DatabaseReference mOfferDatabase;
+
+    FirebaseRecyclerAdapter<Offer, OfferViewHolder> firebaseOfferAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class OfferActivity extends AppCompatActivity {
         setContentView(R.layout.activity_offer);
 
         rvOffersList = findViewById(R.id.rvOffersList);
-        mOfferDatabase = FirebaseDatabase.getInstance().getReference().child("Offers");
+        mOfferDatabase = FirebaseDatabase.getInstance().getReference().child("offers");
         mOfferDatabase.keepSynced(true);
 
         offerToolbar = findViewById(R.id.offerToolbar);
@@ -51,11 +54,14 @@ public class OfferActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        Query query = mOfferDatabase.orderByKey();
+
         FirebaseRecyclerOptions<Offer> options = new FirebaseRecyclerOptions.Builder<Offer>()
-                .setQuery(mOfferDatabase, Offer.class)
+                .setLifecycleOwner(this)
+                .setQuery(query, Offer.class)
                 .build();
 
-        FirebaseRecyclerAdapter<Offer, OfferViewHolder> firebaseOfferAdapter = new FirebaseRecyclerAdapter<Offer, OfferViewHolder>(options) {
+        firebaseOfferAdapter = new FirebaseRecyclerAdapter<Offer, OfferViewHolder>(options) {
             @NonNull
             @Override
             public OfferViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,17 +72,20 @@ public class OfferActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull final OfferViewHolder holder, int position, @NonNull Offer model) {
-                String offerTitle = model.getOfferTitle();
+                String offerTitle = model.getTitle();
+                String desc = model.getDesc();
                 holder.setTitle(offerTitle);
+                holder.setDescription(desc);
             }
         };
 
         rvOffersList.setAdapter(firebaseOfferAdapter);
     }
 
-    public static class OfferViewHolder extends RecyclerView.ViewHolder{
+    private static class OfferViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
+        TextView tvOfferTitle, tvOfferDesc;
 
         public OfferViewHolder(View itemView) {
             super(itemView);
@@ -84,8 +93,13 @@ public class OfferActivity extends AppCompatActivity {
         }
 
         public void setTitle(String message){
-            TextView tvOfferTitle = mView.findViewById(R.id.tvOfferTitle);
+            tvOfferTitle = mView.findViewById(R.id.tvOfferTitle);
             tvOfferTitle.setText(message);
+        }
+
+        public void setDescription(String message){
+            tvOfferDesc = mView.findViewById(R.id.tvOfferDesc);
+            tvOfferDesc.setText(message);
         }
     }
 }

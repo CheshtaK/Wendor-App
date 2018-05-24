@@ -1,26 +1,29 @@
 package com.example.cheshta.wendornavigationproject.model;
 
 public class Offer {
-    public String offerTitle, offerDescription;
+    public String title, desc;
 
-    public Offer(String offerTitle, String offerDescription) {
-        this.offerTitle = offerTitle;
-        this.offerDescription = offerDescription;
+    public Offer() {
     }
 
-    public String getOfferTitle() {
-        return offerTitle;
+    public Offer(String title, String desc) {
+        this.title = title;
+        this.desc = desc;
     }
 
-    public void setOfferTitle(String offerTitle) {
-        this.offerTitle = offerTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public String getOfferDescription() {
-        return offerDescription;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setOfferDescription(String offerDescription) {
-        this.offerDescription = offerDescription;
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }
