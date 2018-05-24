@@ -2,8 +2,12 @@ package com.example.cheshta.wendornavigationproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,15 +17,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cheshta.wendornavigationproject.model.Offer;
 import com.facebook.login.LoginManager;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -37,8 +46,12 @@ public class MainActivity extends AppCompatActivity
 
     //Carousel
     CarouselView carouselView;
-
     int[] sampleImages = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5};
+
+    //OffersList
+    private RecyclerView rvOffersList;
+    DatabaseReference mOfferDatabase;
+    FirebaseRecyclerAdapter<Offer, MainActivity.OfferViewHolder> firebaseOfferAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +118,15 @@ public class MainActivity extends AppCompatActivity
         carouselView.setPageCount(sampleImages.length);
 
         carouselView.setImageListener(imageListener);
+
+        //OffersList
+        rvOffersList = findViewById(R.id.rvOffersList);
+        mOfferDatabase = FirebaseDatabase.getInstance().getReference().child("offers");
+        mOfferDatabase.keepSynced(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvOffersList.setHasFixedSize(true);
+        rvOffersList.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -185,4 +207,59 @@ public class MainActivity extends AppCompatActivity
             imageView.setImageResource(sampleImages[position]);
         }
     };
+
+
+    //OffersList
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Query query = mOfferDatabase.orderByKey();
+
+        FirebaseRecyclerOptions<Offer> options = new FirebaseRecyclerOptions.Builder<Offer>()
+                .setLifecycleOwner(this)
+                .setQuery(query, Offer.class)
+                .build();
+
+        firebaseOfferAdapter = new FirebaseRecyclerAdapter<Offer, MainActivity.OfferViewHolder>(options) {
+            @NonNull
+            @Override
+            public MainActivity.OfferViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.single_offer_layout,parent,false);
+                return new MainActivity.OfferViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull final MainActivity.OfferViewHolder holder, int position, @NonNull Offer model) {
+                String offerTitle = model.getTitle();
+                String desc = model.getDesc();
+                holder.setTitle(offerTitle);
+                holder.setDescription(desc);
+            }
+        };
+
+        rvOffersList.setAdapter(firebaseOfferAdapter);
+    }
+
+    private static class OfferViewHolder extends RecyclerView.ViewHolder{
+
+        View mView;
+        TextView tvOfferTitle, tvOfferDesc;
+
+        public OfferViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setTitle(String message){
+            tvOfferTitle = mView.findViewById(R.id.tvOfferTitle);
+            tvOfferTitle.setText(message);
+        }
+
+        public void setDescription(String message){
+            tvOfferDesc = mView.findViewById(R.id.tvOfferDesc);
+            tvOfferDesc.setText(message);
+        }
+    }
 }
