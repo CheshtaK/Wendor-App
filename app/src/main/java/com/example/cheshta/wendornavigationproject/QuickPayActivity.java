@@ -117,7 +117,14 @@ public class QuickPayActivity extends AppCompatActivity implements ZXingScannerV
         new AlertDialog.Builder(QuickPayActivity.this)
                 .setMessage(message)
                 .setPositiveButton("OK",listener)
-                .setNegativeButton("CANCEL",null)
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent homeIntent = new Intent(QuickPayActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        finish();
+                    }
+                })
                 .create()
                 .show();
     }

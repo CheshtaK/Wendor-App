@@ -43,7 +43,14 @@ public class ProfileActivity extends AppCompatActivity {
         new AlertDialog.Builder(ProfileActivity.this)
                 .setMessage(message)
                 .setPositiveButton("LOGIN",listener)
-                .setNegativeButton("CANCEL",null)
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent homeIntent = new Intent(ProfileActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        finish();
+                    }
+                })
                 .create()
                 .show();
     }
