@@ -1,7 +1,6 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.activities;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,20 +11,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cheshta.wendornavigationproject.R;
 import com.example.cheshta.wendornavigationproject.adapter.CustomInfoWindowAdapter;
+import com.example.cheshta.wendornavigationproject.adapter.PlaceAutocompleteAdapter;
 import com.example.cheshta.wendornavigationproject.model.PlaceInfo;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,7 +30,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.AutocompletePrediction;
-import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
@@ -133,8 +128,8 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    private void init(){
 
+    private void init(){
         googleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -210,6 +205,7 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
         });
     }
 
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -220,6 +216,7 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
             }
         }
     }
+
 
     private void getDeviceLocation(){
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -245,6 +242,7 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
             e.printStackTrace();
         }
     }
+
 
     private void moveCamera(LatLng latLng, float zoom, PlaceInfo placeInfo){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
@@ -275,6 +273,7 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
+
     private void moveCamera(LatLng latLng, float zoom, String title){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
@@ -290,6 +289,7 @@ public class MachineActivity extends AppCompatActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MachineActivity.this);
     }
+
 
     private void getLocationPermission(){
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};

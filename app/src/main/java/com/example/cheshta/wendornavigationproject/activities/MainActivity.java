@@ -1,10 +1,8 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,8 +18,8 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.cheshta.wendornavigationproject.R;
 import com.example.cheshta.wendornavigationproject.model.Offer;
 import com.facebook.login.LoginManager;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -37,21 +35,20 @@ import com.synnapps.carouselview.ImageListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth mAuth;
-    FirebaseUser mUser;
+    private FirebaseUser mUser;
 
-    TextView tvName, tvEmail, tvMainName;
-    NavigationView navigationView;
-    ImageView ivProfile, ivMachine, ivQuickPay;
+    private TextView tvName, tvEmail, tvMainName;
+    private NavigationView navigationView;
+    private ImageView ivProfile, ivMachine, ivQuickPay;
 
     //Carousel
-    CarouselView carouselView;
-    int[] sampleImages = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5};
+    private CarouselView carouselView;
+    private int[] sampleImages = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5};
 
     //OffersList
     private RecyclerView rvOffersList;
-    DatabaseReference mOfferDatabase;
-    FirebaseRecyclerAdapter<Offer, MainActivity.OfferViewHolder> firebaseOfferAdapter;
+    private DatabaseReference mOfferDatabase;
+    private FirebaseRecyclerAdapter<Offer, MainActivity.OfferViewHolder> firebaseOfferAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +67,6 @@ public class MainActivity extends AppCompatActivity
         tvName = headerView.findViewById(R.id.tvName);
         tvEmail = headerView.findViewById(R.id.tvEmail);
 
-        mAuth = FirebaseAuth.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(mUser != null){
@@ -141,19 +137,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             LoginManager.getInstance().logOut();
@@ -167,7 +158,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {

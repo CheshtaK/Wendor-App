@@ -1,4 +1,4 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -6,18 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.cheshta.wendornavigationproject.R;
 import com.example.cheshta.wendornavigationproject.model.Offer;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -25,11 +22,11 @@ import com.google.firebase.database.Query;
 public class OfferActivity extends AppCompatActivity {
 
     private RecyclerView rvOffersList;
-    Toolbar offerToolbar;
+    private Toolbar offerToolbar;
 
-    DatabaseReference mOfferDatabase;
+    private DatabaseReference mOfferDatabase;
 
-    FirebaseRecyclerAdapter<Offer, OfferViewHolder> firebaseOfferAdapter;
+    private FirebaseRecyclerAdapter<Offer, OfferViewHolder> firebaseOfferAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

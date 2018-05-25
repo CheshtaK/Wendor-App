@@ -1,7 +1,7 @@
 package com.example.cheshta.wendornavigationproject.model;
 
 public class Offer {
-    public String title, desc;
+    private String title, desc;
 
     public Offer() {
     }

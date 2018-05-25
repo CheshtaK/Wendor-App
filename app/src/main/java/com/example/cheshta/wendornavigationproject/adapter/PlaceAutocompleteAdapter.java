@@ -1,4 +1,4 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -31,7 +31,6 @@ import java.util.concurrent.TimeoutException;
 public class PlaceAutocompleteAdapter
         extends ArrayAdapter<AutocompletePrediction> implements Filterable {
 
-    private static final String TAG = "PlaceAutocompleteAdapter";
     private static final CharacterStyle STYLE_BOLD = new StyleSpan(Typeface.BOLD);
 
     private ArrayList<AutocompletePrediction> mResultList;

@@ -1,4 +1,4 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cheshta.wendornavigationproject.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -41,21 +42,21 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputLayout tilYourEmail, tilLoginPassword;
-    Toolbar loginToolbar;
-    Button btnLogin, btnRegister;
-    ProgressDialog loginProgress;
+    private TextInputLayout tilYourEmail, tilLoginPassword;
+    private Toolbar loginToolbar;
+    private Button btnLogin, btnRegister;
+    private ProgressDialog loginProgress;
 
-    FirebaseAuth mAuth;
-    DatabaseReference mUserDatabase;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUserDatabase;
 
     //FACEBOOK SIGN IN
-    FancyButton btnFB;
-    CallbackManager callbackManager;
+    private FancyButton btnFB;
+    private CallbackManager callbackManager;
 
     //GOOGLE SIGN IN
     private static final int RC_SIGN_IN = 1;
-    GoogleSignInButton btnGoogle;
+    private GoogleSignInButton btnGoogle;
     private GoogleApiClient mGoogleSignInClient;
 
     @Override
@@ -211,30 +212,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-
-                loginProgress.setTitle("Logging In");
-                loginProgress.setMessage("Please wait while we login to Google!");
-                loginProgress.setCanceledOnTouchOutside(false);
-                loginProgress.show();
-
-                firebaseAuthWithGoogle(account);
-            }
-            catch (ApiException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
 
     //GOOGLE SIGN IN
     private void signIn() {
@@ -261,4 +238,29 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                loginProgress.setTitle("Logging In");
+                loginProgress.setMessage("Please wait while we login to Google!");
+                loginProgress.setCanceledOnTouchOutside(false);
+                loginProgress.show();
+
+                firebaseAuthWithGoogle(account);
+            }
+            catch (ApiException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

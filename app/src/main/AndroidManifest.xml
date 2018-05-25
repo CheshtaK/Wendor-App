@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -51,18 +51,18 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".OfferActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MachineActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".QuickPayActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity"></activity>
+        <activity android:name=".activities.OfferActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.ProfileActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.MachineActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.QuickPayActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.LoginActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.RegisterActivity"
+            android:parentActivityName=".activities.LoginActivity"></activity>
     </application>
 
 </manifest>

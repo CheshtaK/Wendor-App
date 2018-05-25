@@ -1,4 +1,4 @@
-package com.example.cheshta.wendornavigationproject;
+package com.example.cheshta.wendornavigationproject.activities;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -22,7 +22,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class QuickPayActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
